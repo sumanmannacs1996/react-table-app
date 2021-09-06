@@ -1,7 +1,8 @@
 import React,{useMemo} from 'react';
-import {useTable,useSortBy} from 'react-table';
+import {useTable,useSortBy,useGlobalFilter} from 'react-table';
 import {COLUMNS,GROUPED_COLUMNS} from '../columns';
 import MOCK_DATA from '../../data/MOCK_DATA.json';
+import GlobalFilter from './GlobalFilter';
 import '../TableStyle.css'
 
 function FilteringTable() {
@@ -9,12 +10,16 @@ function FilteringTable() {
     //const columns = useMemo(()=>COLUMNS,[]);
     const columns = useMemo(()=>GROUPED_COLUMNS,[]);
 
-    const {getTableProps,getTableBodyProps,headerGroups,rows,prepareRow} = useTable({
+    const {getTableProps,getTableBodyProps,headerGroups,rows,prepareRow,state,setGlobalFilter} = useTable({
         columns,
         data
-    },useSortBy)
+    },useGlobalFilter,useSortBy);
+
+    const {globalFilter} = state;
 
     return (
+        <>
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}/>
         <table {...getTableProps()}>
             <thead>
                 {
@@ -56,6 +61,7 @@ function FilteringTable() {
             }
             </tbody>
         </table>
+        </>
     )
 }
 
