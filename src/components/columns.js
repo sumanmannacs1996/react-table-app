@@ -1,28 +1,35 @@
 import {format} from 'date-fns';
+import ColumnFilter from './filtering/ColumnFilter';
 export const COLUMNS =[
     {
         Header:'Id',
-        accessor:'id'
+        accessor:'id',
+        Filter:ColumnFilter
     },
     {
         Header:'First Name',
-        accessor:'first_name'
+        accessor:'first_name',
+        Filter:ColumnFilter
     },
     {
         Header:'Last Name',
-        accessor:'last_name'
+        accessor:'last_name',
+        Filter:ColumnFilter
     },
     {
         Header:'Date Of Birth',
         accessor:'date_of_birth',
-        Cell: ({value})=>format(new Date(value),'dd/MM/yyyy')
+        Cell: ({value})=>format(new Date(value),'dd/MM/yyyy'),
+        Filter:ColumnFilter
     },
     {
         Header:'Country',
-        accessor:'country'
+        accessor:'country',
+        Filter:ColumnFilter
     },
     {
         Header:'Phone',
+        accessor:'phone',
     }
 ]
 
@@ -33,6 +40,7 @@ export const GROUPED_COLUMNS =[
             {
                 Header:'ID',
                 accessor:'id',
+                Filter:ColumnFilter,
                 disableFilters:true
             }
         ]
@@ -43,10 +51,12 @@ export const GROUPED_COLUMNS =[
             {
                 Header:'First Name',
                 accessor:'first_name',
+                Filter:ColumnFilter
             },
             {
                 Header:'Last Name',
                 accessor:'last_name',
+                Filter:ColumnFilter
             },
         ]
     },
@@ -56,15 +66,18 @@ export const GROUPED_COLUMNS =[
         {
             Header:'Date Of Birth',
             accessor:'date_of_birth',
-            Cell: ({value})=>format(new Date(value),'dd/MM/yyyy')
+            Cell: ({value})=>format(new Date(value),'dd/MM/yyyy'),
+            Filter:ColumnFilter
         },
         {
             Header:'Country',
             accessor:'country',
+            Filter:ColumnFilter
         },
         {
             Header:'Phone',
             accessor:'phone',
+            Filter:ColumnFilter
         }
        ] 
     }

@@ -1,5 +1,5 @@
 import React,{useMemo} from 'react';
-import {useTable,useSortBy,useGlobalFilter} from 'react-table';
+import {useTable,useSortBy,useGlobalFilter,useFilters} from 'react-table';
 import {COLUMNS,GROUPED_COLUMNS} from '../columns';
 import MOCK_DATA from '../../data/MOCK_DATA.json';
 import GlobalFilter from './GlobalFilter';
@@ -13,7 +13,7 @@ function FilteringTable() {
     const {getTableProps,getTableBodyProps,headerGroups,rows,prepareRow,state,setGlobalFilter} = useTable({
         columns,
         data
-    },useGlobalFilter,useSortBy);
+    },useFilters,useGlobalFilter,useSortBy);
 
     const {globalFilter} = state;
 
@@ -35,6 +35,9 @@ function FilteringTable() {
                                         ' 🔽' : ' 🔼') : ''
                                         }
                                     </span>
+                                    <div>
+                                        {column.canFilter ? column.render('Filter') : null}
+                                    </div>
                                     </th>
                                 ))
                             }
