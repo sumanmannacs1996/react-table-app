@@ -10,12 +10,12 @@ function PaginationTable() {
     //const columns = useMemo(()=>COLUMNS,[]);
     const columns = useMemo(()=>GROUPED_COLUMNS,[]);
 
-    const {getTableProps,getTableBodyProps,headerGroups,page,prepareRow,state,setGlobalFilter,previousPage,nextPage,canPreviousPage,canNextPage,pageOptions,gotoPage} = useTable({
+    const {getTableProps,getTableBodyProps,headerGroups,page,prepareRow,state,setGlobalFilter,previousPage,nextPage,canPreviousPage,canNextPage,pageOptions,gotoPage,setPageSize} = useTable({
         columns,
         data
     },useFilters,useGlobalFilter,useSortBy,usePagination);
 
-    const {globalFilter,pageIndex} = state;
+    const {globalFilter,pageIndex,pageSize} = state;
 
     return (
         <>
@@ -73,19 +73,30 @@ function PaginationTable() {
                 {' '}
             </span>
             <span>
-                {' '}
+                {' | '}
                 Go to Page:{' '}
                 <input 
                 onChange={(e)=>gotoPage(Number(e.target.value)-1)}
                 defaultValue={pageIndex+1}
                 style={{width:"25px"}}
                 />
-                {' '}
+                {' | '}
             </span>
             <button onClick={()=>gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</button>
             <button onClick={()=>previousPage()} disabled={!canPreviousPage}>Prev</button>
             <button onClick={()=>nextPage()} disabled={!canNextPage}>Next</button>
             <button onClick={()=>gotoPage(pageOptions.length -1)} disabled={!canNextPage}>{'>>'}</button>
+            <span>
+                {" | "}
+                <select
+                value={pageSize}
+                onChange={(e)=>setPageSize(Number(e.target.value))}
+                >
+                    {
+                        [10,20,50,100].map(p=><option key ={p} value={p}>{p}</option>)
+                    }
+                </select>
+            </span>
         </div>
         </>
     )
