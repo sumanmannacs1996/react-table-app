@@ -1,5 +1,5 @@
 import React,{useMemo} from 'react';
-import {useTable,useSortBy,useGlobalFilter,useFilters} from 'react-table';
+import {useTable,useSortBy,useGlobalFilter,useFilters,usePagination} from 'react-table';
 import {COLUMNS,GROUPED_COLUMNS} from '../columns';
 import MOCK_DATA from '../../data/MOCK_DATA.json';
 import GlobalFilter from '../filtering/GlobalFilter';
@@ -10,12 +10,12 @@ function PaginationTable() {
     //const columns = useMemo(()=>COLUMNS,[]);
     const columns = useMemo(()=>GROUPED_COLUMNS,[]);
 
-    const {getTableProps,getTableBodyProps,headerGroups,rows,prepareRow,state,setGlobalFilter} = useTable({
+    const {getTableProps,getTableBodyProps,headerGroups,page,prepareRow,state,setGlobalFilter,previousPage,nextPage,canPreviousPage,canNextPage,pageOptions} = useTable({
         columns,
         data
-    },useFilters,useGlobalFilter,useSortBy);
+    },useFilters,useGlobalFilter,useSortBy,usePagination);
 
-    const {globalFilter} = state;
+    const {globalFilter,pageIndex} = state;
 
     return (
         <>
@@ -47,7 +47,7 @@ function PaginationTable() {
             </thead>
             <tbody {...getTableBodyProps()}>
             {
-                rows.map(row=>{
+                page.map(row=>{
                     prepareRow(row);
                     return(
                         <tr{...row.getRowProps()}>
@@ -64,6 +64,10 @@ function PaginationTable() {
             }
             </tbody>
         </table>
+        <div>
+            <button onClick={()=>previousPage()} disabled={!canPreviousPage}>Prev</button>
+            <button onClick={()=>nextPage()} disabled={!canNextPage}>Next</button>
+        </div>
         </>
     )
 }
