@@ -10,7 +10,7 @@ function PaginationTable() {
     //const columns = useMemo(()=>COLUMNS,[]);
     const columns = useMemo(()=>GROUPED_COLUMNS,[]);
 
-    const {getTableProps,getTableBodyProps,headerGroups,page,prepareRow,state,setGlobalFilter,previousPage,nextPage,canPreviousPage,canNextPage,pageOptions} = useTable({
+    const {getTableProps,getTableBodyProps,headerGroups,page,prepareRow,state,setGlobalFilter,previousPage,nextPage,canPreviousPage,canNextPage,pageOptions,gotoPage} = useTable({
         columns,
         data
     },useFilters,useGlobalFilter,useSortBy,usePagination);
@@ -72,8 +72,10 @@ function PaginationTable() {
                 </strong>
                 {' '}
             </span>
+            <button onClick={()=>gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</button>
             <button onClick={()=>previousPage()} disabled={!canPreviousPage}>Prev</button>
             <button onClick={()=>nextPage()} disabled={!canNextPage}>Next</button>
+            <button onClick={()=>gotoPage(pageOptions.length -1)} disabled={!canNextPage}>{'>>'}</button>
         </div>
         </>
     )
