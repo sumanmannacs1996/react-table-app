@@ -3,6 +3,7 @@ import BasicTable from './components/BasicTable';
 import SortingTable from './components/SortingTable';
 import FilteringTable from './components/filtering/FilteringTable';
 import PaginationTable from './components/pagination/PaginationTable';
+import StickyTable from './components/sticky/StickyTable';
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
       {/*<BasicTable/> */}
       {/*<SortingTable/> */}
       {/*<FilteringTable/> */}
-      <PaginationTable/>
+      {/*<PaginationTable/> */}
+      <StickyTable/>
     </div>
   );
 }
