@@ -65,6 +65,13 @@ function PaginationTable() {
             </tbody>
         </table>
         <div>
+            <span>
+                Page{' '}
+                <strong>
+                    {pageIndex+1} of {pageOptions.length}
+                </strong>
+                {' '}
+            </span>
             <button onClick={()=>previousPage()} disabled={!canPreviousPage}>Prev</button>
             <button onClick={()=>nextPage()} disabled={!canNextPage}>Next</button>
         </div>
