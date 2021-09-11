@@ -72,6 +72,16 @@ function PaginationTable() {
                 </strong>
                 {' '}
             </span>
+            <span>
+                {' '}
+                Go to Page:{' '}
+                <input 
+                onChange={(e)=>gotoPage(Number(e.target.value)-1)}
+                defaultValue={pageIndex+1}
+                style={{width:"25px"}}
+                />
+                {' '}
+            </span>
             <button onClick={()=>gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</button>
             <button onClick={()=>previousPage()} disabled={!canPreviousPage}>Prev</button>
             <button onClick={()=>nextPage()} disabled={!canNextPage}>Next</button>
