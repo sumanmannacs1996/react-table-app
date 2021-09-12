@@ -18,9 +18,10 @@ function StickyTable() {
     const {globalFilter,pageIndex,pageSize} = state;
 
     return (
-        <>
+    <>
+        <div className='table-container'>
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}/>
-        <table {...getTableProps()}>
+        <table {...getTableProps()} className='table-sticky'>
             <thead>
                 {
                     headerGroups.map(headerGroup => (
@@ -64,7 +65,8 @@ function StickyTable() {
             }
             </tbody>
         </table>
-        <div>
+        </div>
+        <div className='table-controler'>
             <span>
                 Page{' '}
                 <strong>
@@ -98,7 +100,7 @@ function StickyTable() {
                 </select>
             </span>
         </div>
-        </>
+    </>
     )
 }
 

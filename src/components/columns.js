@@ -63,6 +63,12 @@ export const GROUPED_COLUMNS =[
     {
        Header: "Info",
        columns:[
+         {
+             Header: 'Email',
+             accessor:'email',
+             Filter:ColumnFilter,
+
+         },  
         {
             Header:'Date Of Birth',
             accessor:'date_of_birth',
